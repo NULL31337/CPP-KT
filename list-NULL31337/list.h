@@ -93,13 +93,8 @@ public:
   // O(1)
   void pop_front() noexcept {
     Node* tmp = node.next;
-    if (node.prev == node.next) {
-      node.prev = &node;
-      node.next = &node;
-    } else {
-      node.next = node.next->next;
-      node.next->prev = &node;
-    }
+    node.next = node.next->next;
+    node.next->prev = &node;
     delete static_cast<VNode*>(tmp);
   }
 
@@ -122,13 +117,8 @@ public:
   // O(1)
   void pop_back() noexcept {
     Node* tmp = node.prev;
-    if (node.prev == node.next) {
-      node.prev = &node;
-      node.next = &node;
-    } else {
-      node.prev = node.prev->prev;
-      node.prev->next = &node;
-    }
+    node.prev = node.prev->prev;
+    node.prev->next = &node;
     delete static_cast<VNode*>(tmp);
   }
 
